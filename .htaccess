@@ -1,0 +1,37 @@
+RewriteEngine On
+
+RewriteRule ^android /docs/android [R,NC,L]
+
+RewriteRule ^docs/enterprise-mobility/android/(.*)$ /docs/android/$1 [R,NC,L]
+RewriteRule ^docs/enterprise-mobility/ios/(.*)$ /docs/enterprise-mobility/$1 [R,NC,L]
+RewriteRule ^docs/enterprise-mobility/infrastructure/(.*)$ /docs/enterprise-mobility/$1 [R,NC,L]
+RewriteRule ^docs/enterprise-mobility/general/(.*)$ /docs/enterprise-mobility/$1 [R,NC,L]
+RewriteRule ^docs/enterprise-mobility/mobileiron/(.*)$ /docs/enterprise-mobility/$1 [R,NC,L]
+
+RewriteRule ^docs/nextcloud/(.*)$ /docs/linux/$1 [R,NC,L]
+RewriteRule ^docs/miscellaneous/(.*)$ /docs/linux/$1 [R,NC,L]
+RewriteRule ^docs/linux/ubuntu/(.*)$ /docs/linux/$1 [R,NC,L]
+RewriteRule ^docs/linux/lxd/(.*)$ /docs/linux/$1 [R,NC,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R,L]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php?args=$0 [NC,L]
+
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|webp|png|gif|js|css|svg)$">
+Header set Cache-Control "max-age=604800, public"
+</FilesMatch>
+
+Header set Strict-Transport-Security "max-age=63072000"
+Header add Content-Security-Policy "default-src 'self';font-src fonts.gstatic.com pro.fontawesome.com;style-src 'self' 'unsafe-inline' fonts.googleapis.com pro.fontawesome.com;script-src 'self' cdnjs.cloudflare.com static.cloudflareinsights.com; connect-src 'self' cloudflareinsights.com"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header set X-Content-Type-Options "nosniff"
+Header set X-XSS-Protection "1; mode=block"
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css text/javascript application/javascript image/svg+xml image/x-icon
+</IfModule>
