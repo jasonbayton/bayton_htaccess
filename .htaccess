@@ -27,7 +27,7 @@ Header set Cache-Control "max-age=604800, public"
 </FilesMatch>
 
 Header set Strict-Transport-Security "max-age=63072000"
-Header add Content-Security-Policy "default-src 'self';font-src fonts.gstatic.com pro.fontawesome.com;style-src 'self' 'unsafe-inline' fonts.googleapis.com pro.fontawesome.com;script-src 'self' cdnjs.cloudflare.com static.cloudflareinsights.com; connect-src 'self' cloudflareinsights.com"
+Header add Content-Security-Policy "default-src 'self' *.bayton.org bayton.org;font-src fonts.gstatic.com pro.fontawesome.com;style-src 'self' 'unsafe-inline' fonts.googleapis.com pro.fontawesome.com;script-src 'self' cdnjs.cloudflare.com static.cloudflareinsights.com; connect-src 'self' cloudflareinsights.com; frame-src 'self' *.youtube.com *.twitter.com *.google.com; img-src *"
 Header always set X-Frame-Options "SAMEORIGIN"
 Header set X-Content-Type-Options "nosniff"
 Header set X-XSS-Protection "1; mode=block"
